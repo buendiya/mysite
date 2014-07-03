@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <title>Garment</title>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script>
+    $(document).ready(function() {
+        // Output delta and description
+        function output_delta_and_description() {
+            console.log($("#id_material option:selected").text());
+            console.log($("#id_cloth_type option:selected").text());
+            $.ajax({
+                url: '/garment/delta_and_description/',
+                data: {
+                    material: $("#id_material option:selected").text(),
+                    cloth_type: $("#id_cloth_type option:selected").text()
+                },
+                type: 'GET', //this is the default though, you don't actually need to always mention it
+                dataType: "json",
+                success: function(data) {
+                    var tmp = JSON.stringify(data.delta);
+                    if (tmp != "{}") {
+                        $("#id_delta").text(tmp);
+                    } else {
+                        $("#id_delta").text("");
+                    }
+
+                    $("#id_description").text(data.desc);
+                },
+                error: function(data) {
+                    console.log('Got an error dude');
+                }
+            });
+        }
+
+        $("#id_material").change(function() {
+            output_delta_and_description();
+        });
+        $("#id_cloth_type").change(function() {
+            output_delta_and_description();
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <h1>Garment</h1>
+    {% if upload_succeed %}
+    <p style="color: red;">
+        You have save one garment successfully. {% endif %} {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{form.errors|pluralize }} below. {% endif %}
+
+            <form action="/garment/" method="post">{% csrf_token %}
+                <table>
+                    {% for field in form %}
+                    <div class="fieldWrapper">
+                        <tr>
+                            <th>{{ field.label_tag }}</th>
+                            <td>{{ field }}</td>
+                            <td>{{ field.errors }}</td>
+                        </tr>
+                    </div>
+                    {% endfor %}
+                </table>
+                <input type="submit" value="保存并添加下一个">
+            </form>
+</body>
+
+</html>
