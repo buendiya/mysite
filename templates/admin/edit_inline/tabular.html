@@ -50,6 +50,9 @@
               {% else %}
                   {{ field.field.errors.as_ul }}
                   {{ field.field }}
+                  {% if field.field.name == "detail_info" %}
+                    hello 
+                  {% endif %}
               {% endif %}
               </td>
             {% endfor %}
