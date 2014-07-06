@@ -23,5 +23,7 @@ class GarmentItemAdmin(admin.ModelAdmin):
     inlines = [GarmentSubitemInlineAdmin, GarmentItemMatchDetailInlineAdmin, ]
     list_display = ('item_id', )
     search_fields = ('item_id', )
+    class Media:
+        js = ("garment.js",)
     
 admin.site.register(GarmentItem, GarmentItemAdmin)

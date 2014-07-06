@@ -1,4 +1,8 @@
 {% load i18n admin_static admin_modify %}{% load cycle from future %}
+{% block extrahead %}
+
+{% endblock %}
+
 <div class="inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
   <div class="tabular inline-related {% if forloop.last %}last-related{% endif %}">
 {{ inline_admin_formset.formset.management_form }}
@@ -51,7 +55,23 @@
                   {{ field.field.errors.as_ul }}
                   {{ field.field }}
                   {% if field.field.name == "detail_info" %}
-                    hello 
+                    <div id="dialog-form" title="Create new user">
+                      <p class="validateTips">All form fields are required.</p>
+                      <form>
+                        <fieldset>
+                          <label for="name">Name</label>
+                          <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+                          <label for="email">Email</label>
+                          <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+                          <label for="password">Password</label>
+                          <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+                     
+                          <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                        </fieldset>
+                      </form>
+                    </div>
+                    <button type="button" id="Edit-detail-info">Edit</button>
                   {% endif %}
               {% endif %}
               </td>
