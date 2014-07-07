@@ -8,7 +8,8 @@ from django.contrib.auth.models import User
 class GarmentSubitemInlineAdmin(admin.TabularInline):
     model = GarmentSubitem
     extra = 1
-
+    class Media:
+        js = ("garment.js",)
 
 class GarmentItemMatchDetailInlineAdmin(admin.TabularInline):
     model = GarmentItemMatchDetail
@@ -23,7 +24,6 @@ class GarmentItemAdmin(admin.ModelAdmin):
     inlines = [GarmentSubitemInlineAdmin, GarmentItemMatchDetailInlineAdmin, ]
     list_display = ('item_id', )
     search_fields = ('item_id', )
-    class Media:
-        js = ("garment.js",)
+
     
 admin.site.register(GarmentItem, GarmentItemAdmin)
