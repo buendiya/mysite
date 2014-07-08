@@ -57,6 +57,7 @@
                   {% if field.field.name == "detail_info" %}
                     <div id="dialog-form" title="Create new user">
                       <p class="validateTips">All form fields are required.</p>
+                     
                       <form>
                         <fieldset>
                           <label for="name">Name</label>
@@ -71,7 +72,10 @@
                         </fieldset>
                       </form>
                     </div>
-                    <button type="button" id="Edit-detail-info">Edit</button>
+                    <button type="button">Edit</button>
+                    {% comment %}
+                    <button type="button" id={{field.field.id_for_label|add:"_button"}}>Edit</button>
+                    {% endcomment %}
                   {% endif %}
               {% endif %}
               </td>
