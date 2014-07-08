@@ -55,7 +55,7 @@
                   {{ field.field.errors.as_ul }}
                   {{ field.field }}
                   {% if field.field.name == "detail_info" %}
-                    <div id="dialog-form" title="Create new user">
+                    <div id={{ field.field.id_for_label | add:"_dialog" }} title="Create new user">
                       <p class="validateTips">All form fields are required.</p>
                      
                       <form>
