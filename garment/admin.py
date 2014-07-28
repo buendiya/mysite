@@ -9,7 +9,12 @@ class GarmentSubitemInlineAdmin(admin.TabularInline):
     model = GarmentSubitem
     extra = 1
     class Media:
-        js = ("garment.js",)
+        js = ("defination.js", "jquery-ui.js", "garment.js", )
+        css = {
+            "all": ("jquery-ui.css",)
+        }
+
+
 
 class GarmentItemMatchDetailInlineAdmin(admin.TabularInline):
     model = GarmentItemMatchDetail
