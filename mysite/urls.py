@@ -5,6 +5,7 @@ from django.contrib import admin
 from views import hello, current_datetime, hours_ahead
 
 import logging
+from rest_framework.tests.test_serializer import BookSerializer
 try:
     from books.views import search, contact, thanks, display_meta
     
@@ -20,6 +21,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^books/', include('books.urls')),
     ('^hello/$', hello),
     ('^time/$', current_datetime),
     (r'^time/plus/(\d{1,2})/$', hours_ahead),

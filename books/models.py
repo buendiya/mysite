@@ -15,6 +15,7 @@ class Author(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=40)
     email = models.EmailField(blank=True)
+    phone = models.BinaryField(max_length=30, blank=True, default=1)
 #     birthday = models.DateField(auto_now=True)
 
     def __unicode__(self):

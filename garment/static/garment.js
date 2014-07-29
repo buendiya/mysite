@@ -6,12 +6,12 @@
       WaistGirth = $( "#WaistGirth" ),
       HipsGirth = $( "#HipsGirth" ),
       Height = $( "#Height" ),
-      BreashGirth = $( "#BreashGirth" ),
+      BreastGirth = $( "#BreastGirth" ),
       ShoulderWidth = $( "#ShoulderWidth" ),
       tips = $( ".validateTips" ),
       detail_info = {},
       button_id = "";
-      allFields = $( [] ).add( WaistGirth ).add( HipsGirth ).add( Height ).add( BreashGirth ).add( ShoulderWidth );
+      allFields = $( [] ).add( WaistGirth ).add( HipsGirth ).add( Height ).add( BreastGirth ).add( ShoulderWidth );
 
       function updateTips( t ) {
         tips
@@ -34,35 +34,25 @@
 
       function fill() {
         if ( $( "#" + button_id ).prev().val() ) {
-          detail_info = JSON.parse( $( "#id_subitems-0-detail_info" ).val() );
+          detail_info = JSON.parse( $( "#" + button_id ).prev().val() );
         }
-        if ( detail_info["WaistGirth"] ) {
-          WaistGirth.val(detail_info["WaistGirth"]);
-        }
-        if ( detail_info["HipsGirth"] ) {
-          HipsGirth.val(detail_info["HipsGirth"]);
-        }
-        if ( detail_info["Height"] ) {
-          Height.val(detail_info["Height"]);
-        }
-        if ( detail_info["BreashGirth"] ) {
-          BreashGirth.val(detail_info["BreashGirth"]);
-        }
-        if ( detail_info["ShoulderWidth"] ) {
-          ShoulderWidth.val(detail_info["ShoulderWidth"]);
-        }
+        WaistGirth.val(detail_info["WaistGirth"]);
+        HipsGirth.val(detail_info["HipsGirth"]);
+        Height.val(detail_info["Height"]);
+        BreastGirth.val(detail_info["BreastGirth"]);
+        ShoulderWidth.val(detail_info["ShoulderWidth"]);
       }
 
       function edit() {
         var valid = true;
         valid = valid && checkNumberic( WaistGirth.val() ) && checkNumberic( HipsGirth.val() ) 
-                      && checkNumberic( Height.val() ) && checkNumberic( BreashGirth.val() ) && checkNumberic( ShoulderWidth.val() ); 
+                      && checkNumberic( Height.val() ) && checkNumberic( BreastGirth.val() ) && checkNumberic( ShoulderWidth.val() ); 
 
         if ( valid ) {
           detail_info["WaistGirth"] = Number(WaistGirth.val());
           detail_info["HipsGirth"] = Number(HipsGirth.val());
           detail_info["Height"] = Number(Height.val());
-          detail_info["BreashGirth"] = Number(BreashGirth.val());
+          detail_info["BreastGirth"] = Number(BreastGirth.val());
           detail_info["ShoulderWidth"] = Number(ShoulderWidth.val());
           $( "#" + button_id ).prev().val( JSON.stringify(detail_info) );
           dialog.dialog( "close" );
