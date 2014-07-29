@@ -43,7 +43,8 @@ INSTALLED_APPS = (
     'books',
     'garment',
     'south',
-    'rest_framework'
+    'rest_framework',
+    'restSnippets'
 )
 
 REST_FRAMEWORK = {
