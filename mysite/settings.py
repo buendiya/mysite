@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'garment',
     'south',
     'rest_framework',
+    'restSnippets'
 )
 
 REST_FRAMEWORK = {
