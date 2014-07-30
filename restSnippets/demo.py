@@ -1,3 +1,9 @@
+import os
+import sys
+cur_dir = os.path.dirname(__file__)
+sys.path.append(os.path.dirname(cur_dir))
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+
 from restSnippets.models import Snippet
 from restSnippets.serializers import SnippetSerializer
 from rest_framework.renderers import JSONRenderer

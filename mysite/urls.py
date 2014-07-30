@@ -22,6 +22,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^books/', include('books.urls')),
+    url(r'^restSnippets/', include('restSnippets.urls')),
     ('^hello/$', hello),
     ('^time/$', current_datetime),
     (r'^time/plus/(\d{1,2})/$', hours_ahead),
