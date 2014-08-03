@@ -8,7 +8,6 @@ import logging
 from rest_framework.tests.test_serializer import BookSerializer
 try:
     from books.views import search, contact, thanks, display_meta
-    
 except Exception, e:
     logging.warning(e)
 

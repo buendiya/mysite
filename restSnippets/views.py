@@ -16,7 +16,7 @@ class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-    
+
     def pre_save(self, obj):
         obj.owner = self.request.user
 
