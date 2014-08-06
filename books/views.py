@@ -1,8 +1,11 @@
 from django.shortcuts import render_to_response, HttpResponse, RequestContext
-from books.models import Book   
+from books.models import Book, Publisher
 from django.http import HttpResponseRedirect
 from books.forms import ContactForm
 from django.views.generic import ListView
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from books.serializers import UserSerializer, GroupSerializer
 
 import logging
 logger = logging.getLogger('mysite.books')
@@ -84,10 +87,6 @@ def display_meta(request):
         html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
     return HttpResponse('<table>%s</table>' % '\n'.join(html))
 
-from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
-from books.serializers import UserSerializer, GroupSerializer
-
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -115,3 +114,6 @@ class BookListView(ListView):
         response['Last-Modified'] = last_book.publication_date.strftime('%a, %d %b %Y %H:%M:%S GMT')
         return response
 
+
+class PublisherList(ListView):
+    model = Publisher
