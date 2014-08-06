@@ -1,9 +1,8 @@
 from django.shortcuts import render_to_response, HttpResponse, RequestContext
-from books.models import Book
-        
+from books.models import Book   
 from django.http import HttpResponseRedirect
-
 from books.forms import ContactForm
+from django.views.generic import ListView
 
 import logging
 logger = logging.getLogger('mysite.books')
@@ -104,3 +103,15 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+
+class BookListView(ListView):
+    model = Book
+
+    def head(self, *args, **kwargs):
+        last_book = self.get_queryset().latest('publication_date')
+        response = HttpResponse('')
+        # RFC 1123 date format
+        response['Last-Modified'] = last_book.publication_date.strftime('%a, %d %b %Y %H:%M:%S GMT')
+        return response
+

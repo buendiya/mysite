@@ -1,9 +1,7 @@
 from django.conf.urls import patterns, include, url
-
 from django.contrib import admin
-
-from views import hello, current_datetime, hours_ahead
-
+from views import hello, current_datetime, hours_ahead, AboutView
+from django.views.generic import TemplateView
 import logging
 from rest_framework.tests.test_serializer import BookSerializer
 try:
@@ -12,7 +10,6 @@ except Exception, e:
     logging.warning(e)
 
 admin.autodiscover()
-
 
 urlpatterns = patterns('',
     # Examples:
@@ -29,6 +26,6 @@ urlpatterns = patterns('',
     (r'^search/$', search),
     (r'^contact/$', contact),
     (r'^contact/thanks/$', thanks),
-    (r'^display_meta/$', display_meta),                 
-                       
+    (r'^display_meta/$', display_meta),
+    url(r'^about/', AboutView.as_view()),
 )
