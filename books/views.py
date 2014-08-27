@@ -2,41 +2,13 @@ from django.shortcuts import render_to_response, HttpResponse, RequestContext
 from books.models import Book, Publisher
 from django.http import HttpResponseRedirect
 from books.forms import ContactForm
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from books.serializers import UserSerializer, GroupSerializer
 
 import logging
 logger = logging.getLogger('mysite.books')
-
-## Create your views here.
-#def search_form(request):
-#    return render(request, 'search_form.html')
-#
-#def search(request):
-#    q = request.GET['q']
-#    if q:
-#        books = Book.objects.filter(title__icontains=q)
-#        return render_to_response('search_results.html',
-#            {'books': books, 'query': q})
-#    else:
-#        return render_to_response('search_form.html', {'error': True})
-
-#def search(request):
-#    error = False
-#    if 'q' in request.GET:
-#        q = request.GET['q']
-#        if not q:
-#            error = True
-#        elif len(q) > 20:
-#            error = True
-#        else:
-#            books = Book.objects.filter(title__icontains=q)
-#            return render_to_response('search_results.html',
-#                {'books': books, 'query': q})
-#    return render_to_response('search_form.html',
-#        {'error': error})
 
 def search(request):
     logger.info("request.method: %s", request.method)
@@ -117,3 +89,24 @@ class BookListView(ListView):
 
 class PublisherList(ListView):
     model = Publisher
+    context_object_name = 'my_favorite_publishers'
+
+class PublisherDetail(DetailView):
+    model = Publisher
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(PublisherDetail, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['book_list'] = Book.objects.all()
+        return context
+    
+    def get_object(self):
+        super(PublisherDetail, self).get_object()
+#         return get_object_or_404(User, pk=request.session['user_id'])
+
+
+
+
+
+
+

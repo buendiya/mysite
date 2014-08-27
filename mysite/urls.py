@@ -18,7 +18,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^books/', include('books.urls')),
-    url(r'^', include('restSnippets.urls')),
+    url(r'^', include('snippets.urls')),
     ('^hello/$', hello),
     ('^time/$', current_datetime),
     (r'^time/plus/(\d{1,2})/$', hours_ahead),
